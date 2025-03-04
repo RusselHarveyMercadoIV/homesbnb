@@ -34,7 +34,7 @@ export default function Home() {
               </p>
             </section>
           </div>
-          <ReserveCard price={"1965"} />
+          <ReserveCard price={1965} />
         </div>
       </main>
     </>

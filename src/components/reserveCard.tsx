@@ -28,7 +28,9 @@ export default function ReserveCard({ price }: ReserveCardType) {
           <DatePickerWithRange handleSelect={handleGetDaysInput} />
         </div>
 
-        <Button className="text-xl rounded-full py-6 w-full">Reserve</Button>
+        <Button className="text-xl rounded-full py-6 w-full cursor-pointer">
+          Reserve
+        </Button>
         <p className="text-slate-800">You won't be charged yet</p>
 
         <div className="flex flex-row justify-between w-full text-lg">
