@@ -15,16 +15,21 @@ import {
 type DatePickerWithRangeType = {
   className?: React.HTMLAttributes<HTMLDivElement>;
   handleSelect: (days: number) => void;
+  from: string;
+  to: number;
 };
 
 export function DatePickerWithRange({
   className,
   handleSelect,
+  from,
+  to,
 }: DatePickerWithRangeType) {
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(),
-    to: addDays(new Date(), 5),
+    from: new Date(from),
+    to: addDays(new Date(), to),
   });
+
   const daysSelected =
     date?.from && date?.to ? differenceInDays(date.to, date.from) + 1 : 0;
 

@@ -3,14 +3,20 @@ import ReserveCard from "@/components/reserveCard";
 import { useLocation } from "react-router";
 
 export default function Home() {
-  const location = useLocation();
-  const price = (location.state as { price?: number })?.price || 0;
+  const routeLocation = useLocation();
+  const { price, name, location, from, to } = (routeLocation.state as {
+    price: number;
+    name: string;
+    location: string;
+    from: string;
+    to: number;
+  }) || { price: 0, name: "", location: "", schedule: "" };
 
   return (
     <>
       <Navigation />
       <main className="relative flex flex-col gap-6 w-[1200px] mx-auto justify-center items-center my-20 mx-20">
-        <h1 className="font-[600] text-4xl">Cebu's Mountain View</h1>
+        <h1 className="font-[600] text-4xl">{name}</h1>
         <button className="absolute right-10 top-4 cursor-pointer">
           share
         </button>
@@ -18,7 +24,7 @@ export default function Home() {
         <div className="relative flex w-full justify-between">
           <div className="flex flex-col gap-10 pr-10">
             <div>
-              <h2 className="font-[600] text-2xl">Cebu City, Philippines</h2>
+              <h2 className="font-[600] text-2xl">{location}</h2>
               <p>
                 2 guests <span className="text-slate-300">|</span> Studio{" "}
                 <span className="text-slate-300">|</span> 1 bed{" "}
@@ -38,7 +44,7 @@ export default function Home() {
               </p>
             </section>
           </div>
-          <ReserveCard price={price} />
+          <ReserveCard price={price} from={from} to={to} />
         </div>
       </main>
     </>

@@ -5,9 +5,11 @@ import { useState } from "react";
 
 type ReserveCardType = {
   price: number;
+  from: string;
+  to: number;
 };
 
-export default function ReserveCard({ price }: ReserveCardType) {
+export default function ReserveCard({ price, from, to }: ReserveCardType) {
   const [selectedDays, setSelectedDays] = useState<number>();
 
   const handleGetDaysInput = (days: number) => {
@@ -25,7 +27,11 @@ export default function ReserveCard({ price }: ReserveCardType) {
       <CardContent className="flex flex-col gap-6 justify-center items-center">
         <div className="flex flex-col gap-2">
           <p>Check In / Check Out</p>
-          <DatePickerWithRange handleSelect={handleGetDaysInput} />
+          <DatePickerWithRange
+            handleSelect={handleGetDaysInput}
+            from={from}
+            to={to}
+          />
         </div>
 
         <Button className="text-xl rounded-full py-6 w-full cursor-pointer">
