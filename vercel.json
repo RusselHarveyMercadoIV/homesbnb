@@ -12,7 +12,7 @@
   ],
   "routes": [
     {
-      "src": "/.*",
+      "src": "/(.*)",
       "dest": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js"
     }
   ]
