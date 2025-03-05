@@ -1,5 +1,5 @@
-import Navigation from "../components/Navigation";
-import PreviewCard from "../components/PreviewCard";
+import Navigation from "../components/navigation";
+import PreviewCard from "../components/previewCard";
 import COVER1 from "../assets/images/grand-residence/condo1-4.jpg";
 import COVER2 from "../assets/images/naval/naval-1.jfif";
 import COVER3 from "../assets/images/tisa/tisabldg-1.jpg";

@@ -1,4 +1,4 @@
-import Navigation from "@/components/Navigation";
+import Navigation from "@/components/navigation";
 import ReserveCard from "@/components/reserveCard";
 import { useLocation } from "react-router";
 import { data } from "./App";
