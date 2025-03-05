@@ -10,9 +10,9 @@ function App() {
         {/* <Trending /> */}
         <div className="flex flex-col h-[40rem] justify-center items-center">
           <div className="flex gap-15 px-20 ">
-            <PreviewCard />
-            <PreviewCard />
-            <PreviewCard />
+            <PreviewCard price={2265} />
+            <PreviewCard price={1862} />
+            <PreviewCard price={1665} />
           </div>
         </div>
       </main>

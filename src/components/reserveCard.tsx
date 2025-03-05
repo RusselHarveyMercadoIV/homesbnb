@@ -17,7 +17,7 @@ export default function ReserveCard({ price }: ReserveCardType) {
   const computedPrice = selectedDays && price * selectedDays;
 
   return (
-    <Card className="sticky top-0 right-0 w-[400px] h-[500px] p-8">
+    <Card className="sticky top-0 right-0 w-[400px] h-[500px] py-8 px-2">
       <CardHeader className="flex flex-row gap-2  items-end">
         <h2 className="text-4xl">P {price}</h2>
         <p>night</p>

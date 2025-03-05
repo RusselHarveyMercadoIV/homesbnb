@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router";
 
-export default function PreviewCard() {
+type PreviewCardType = {
+  price: number;
+};
+
+export default function PreviewCard({ price }: PreviewCardType) {
   const navigate = useNavigate();
 
   const handlePreviewClick = () => {
-    navigate("/home");
+    navigate("/home", { state: { price: price } });
   };
 
   return (
@@ -19,7 +23,7 @@ export default function PreviewCard() {
       </div>
       <p>Nearby</p>
       <p>March 29 - Apr 3</p>
-      <h3 className="font-bold">P 2,265 night</h3>
+      <h3 className="font-bold">P {price} night</h3>
     </div>
   );
 }

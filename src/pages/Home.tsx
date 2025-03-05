@@ -1,7 +1,11 @@
 import Navigation from "@/components/Navigation";
 import ReserveCard from "@/components/reserveCard";
+import { useLocation } from "react-router";
 
 export default function Home() {
+  const location = useLocation();
+  const price = (location.state as { price?: number })?.price || 0;
+
   return (
     <>
       <Navigation />
@@ -34,7 +38,7 @@ export default function Home() {
               </p>
             </section>
           </div>
-          <ReserveCard price={1965} />
+          <ReserveCard price={price} />
         </div>
       </main>
     </>
