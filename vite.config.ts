@@ -9,12 +9,12 @@ import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 // import react from "@vitejs/plugin-react";
 import { reactRouter } from "@react-router/dev/vite";
-import { vercelPreset } from "@vercel/react-router/vite";
+import vercel from "vite-plugin-vercel";
 
 import path from "path";
 
 export default defineConfig({
-  plugins: [tailwindcss(), reactRouter(), vercelPreset()],
+  plugins: [tailwindcss(), reactRouter(), vercel()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
