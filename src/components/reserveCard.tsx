@@ -21,7 +21,7 @@ export default function ReserveCard({ price, from, to }: ReserveCardType) {
   return (
     <Card className="sticky top-0 right-0 w-[400px] h-[500px] py-8 px-2">
       <CardHeader className="flex flex-row gap-2  items-end">
-        <h2 className="text-4xl">P {price}</h2>
+        <h2 className="text-4xl">₱ {price}</h2>
         <p>night</p>
       </CardHeader>
       <CardContent className="flex flex-col gap-6 justify-center items-center">
@@ -41,14 +41,14 @@ export default function ReserveCard({ price, from, to }: ReserveCardType) {
 
         <div className="flex flex-row justify-between w-full text-lg">
           <p>
-            P {price} x {selectedDays} nights
+            ₱ {price} x {selectedDays} nights
           </p>
-          <p>P {computedPrice}</p>
+          <p>₱ {computedPrice}</p>
         </div>
         <div className="border w-full" />
         <div className="flex flex-row justify-between w-full text-lg font-bold">
           <p>Total before taxes</p>
-          <p>P {computedPrice}</p>
+          <p>₱ {computedPrice}</p>
         </div>
       </CardContent>
     </Card>
