@@ -1,4 +1,4 @@
-import NavigationMenu from "./ui/NavigationMenu";
+import NavigationMenu from "./ui/navigationMenu";
 import { NavLink } from "react-router";
 
 export default function Navigation() {
