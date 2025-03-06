@@ -23,20 +23,3 @@ export async function login(merchant: merchantType) {
     console.error(err);
   }
 }
-
-export async function getUser() {
-  try {
-    const user = await account?.get();
-
-    if (user.$id) {
-      const userAvatar = avatar?.getInitials(user.name);
-      return {
-        ...user,
-        avatar: userAvatar.toString(),
-      };
-    }
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-}

@@ -2,10 +2,10 @@ import NavigationMenu from "./ui/navigationMenu";
 import { NavLink } from "react-router";
 
 import PROFILE from "../assets/icons/profile.png";
-import { useUserContext } from "@/context/user";
+import { useUser } from "@/context/user";
 
 export default function Navigation() {
-  const { user } = useUserContext();
+  const { user } = useUser();
 
   return (
     <header className="sticky top-0 bg-white flex flex-row h-30 justify-between items-center mx-20 z-100">
@@ -27,7 +27,9 @@ export default function Navigation() {
             Login
           </NavLink>
         ) : (
-          user.name
+          <p className=" className=" bg-black text-white px-6 py-1 rounded-xl>
+            {user.name}
+          </p>
         )}
       </div>
     </header>

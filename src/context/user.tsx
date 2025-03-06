@@ -1,12 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { account, ID } from "../appwrite/appwrite";
+import { Models } from "appwrite";
 
-type User = {
-  id: string;
-  email: string;
-  name: string;
-};
+// Define User type using Appwrite's model
+type User = Models.User<Models.Preferences>;
 
+// Define context type
 type UserContextType = {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
@@ -14,8 +13,10 @@ type UserContextType = {
   logout: () => Promise<void>;
 };
 
+// Create context
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
+// Custom hook to access context
 export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
@@ -24,10 +25,12 @@ export const useUser = () => {
   return context;
 };
 
+// Provider component
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -36,6 +39,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
         setUser(response);
       } catch (error) {
         setUser(null);
+      } finally {
+        setLoading(false);
       }
     };
     fetchUser();
@@ -47,7 +52,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await account.get();
       setUser(response);
     } catch (error) {
-      throw new Error("Login failed");
+      console.error("Login failed:", error);
+      throw error;
     }
   };
 
@@ -57,7 +63,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       await account.create(userId, email, password, name);
       await login(email, password);
     } catch (error) {
-      throw new Error("Registration failed");
+      console.error("Registration failed:", error);
+      throw error;
     }
   };
 
@@ -66,21 +73,16 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       await account.deleteSession("current");
       setUser(null);
     } catch (error) {
-      throw new Error("Logout failed");
+      console.error("Logout failed:", error);
+      throw error;
     }
   };
 
+  const value: UserContextType = { user, login, register, logout };
+
   return (
-    <UserContext.Provider value={{ user, login, register, logout }}>
-      {children}
+    <UserContext.Provider value={value}>
+      {loading ? <div>Loading...</div> : children}
     </UserContext.Provider>
   );
-};
-
-export const useUserContext = (): UserContextType => {
-  const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error("useGlobalContext must be used within a GlobalProvider");
-  }
-  return context;
 };
