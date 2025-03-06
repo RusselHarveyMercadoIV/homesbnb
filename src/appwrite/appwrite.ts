@@ -1,11 +1,13 @@
 import { merchantType } from "@/constants/types";
-import { Client, Account, ID, OAuthProvider } from "appwrite";
+import { Client, Account, ID, OAuthProvider, Avatars } from "appwrite";
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject(process.env.REACT_APP_APPWRITE_PROJECT_ID || "");
+  .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
 
 export const account = new Account(client);
+export const avatar = new Avatars(client);
+
 export { ID };
 
 export async function login(merchant: merchantType) {
@@ -19,5 +21,22 @@ export async function login(merchant: merchantType) {
     }
   } catch (err) {
     console.error(err);
+  }
+}
+
+export async function getUser() {
+  try {
+    const user = await account?.get();
+
+    if (user.$id) {
+      const userAvatar = avatar?.getInitials(user.name);
+      return {
+        ...user,
+        avatar: userAvatar.toString(),
+      };
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 }
