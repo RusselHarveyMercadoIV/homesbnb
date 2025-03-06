@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { account, ID } from "../appwrite/appwrite";
+import { account } from "../appwrite/appwrite";
 import { Models } from "appwrite";
 
 // Define User type using Appwrite's model
@@ -9,7 +9,7 @@ type User = Models.User<Models.Preferences>;
 type UserContextType = {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, name: string) => Promise<void>;
+  // register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -57,16 +57,16 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const register = async (email: string, password: string, name: string) => {
-    try {
-      const userId = ID.unique();
-      await account.create(userId, email, password, name);
-      await login(email, password);
-    } catch (error) {
-      console.error("Registration failed:", error);
-      throw error;
-    }
-  };
+  // const register = async (email: string, password: string, name: string) => {
+  //   try {
+  //     const userId = ID.unique();
+  //     await account.create(userId, email, password, name);
+  //     await login(email, password);
+  //   } catch (error) {
+  //     console.error("Registration failed:", error);
+  //     throw error;
+  //   }
+  // };
 
   const logout = async () => {
     try {
@@ -78,7 +78,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const value: UserContextType = { user, login, register, logout };
+  const value: UserContextType = { user, login, logout };
 
   return (
     <UserContext.Provider value={value}>
