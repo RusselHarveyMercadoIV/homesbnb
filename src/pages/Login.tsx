@@ -1,12 +1,12 @@
 import { LoginForm } from "@/components/login-form";
-import { useUserContext } from "@/context/user";
+import { useUser } from "@/context/user";
 import { HomeIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 
 // import { LoginForm } from "../components/login-form"
 
 export default function LoginPage() {
-  const { user } = useUserContext();
+  const { user } = useUser();
 
   const navigate = useNavigate();
 
