@@ -23,8 +23,8 @@ export function LoginForm({
       if (merchant === "google") {
         await account.createOAuth2Session(
           OAuthProvider.Google, // provider
-          "http://localhost:5173/", // redirect here on success
-          "http://localhost:5173/fail" // redirect here on failure
+          "https://homesbnb.vercel.app/", // redirect here on success
+          "https://homesbnb.vercel.app/login" // redirect here on failure
         );
       }
     } catch (err) {
