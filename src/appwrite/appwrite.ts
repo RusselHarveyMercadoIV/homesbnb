@@ -1,5 +1,4 @@
-import { merchantType } from "@/constants/types";
-import { Client, Account, ID, OAuthProvider, Avatars } from "appwrite";
+import { Client, Account, Avatars } from "appwrite";
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
@@ -8,18 +7,19 @@ const client = new Client()
 export const account = new Account(client);
 export const avatar = new Avatars(client);
 
-export { ID };
-
-export async function login(merchant: merchantType) {
+export const getUser = async () => {
   try {
-    if (merchant === "google") {
-      await account.createOAuth2Session(
-        OAuthProvider.Google, // provider
-        "https://homesbnb.vercel.app/", // redirect here on success
-        "https://homesbnb.vercel.app/login" // redirect here on failure
-      );
-    }
-  } catch (err) {
-    console.error(err);
+    return await account.get();
+  } catch (error) {
+    console.error(error);
   }
-}
+};
+
+// export async function getCurrentSession() {
+//   try {
+//     const session = await account.getSession("current");
+//     console.log("Current session:", session);
+//   } catch (error) {
+//     console.error("Error getting session:", error);
+//   }
+// }

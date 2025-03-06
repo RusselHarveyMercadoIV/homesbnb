@@ -10,8 +10,9 @@ import {
 // import { Input } from "@/components/ui/input";
 // import { Label } from "@/components/ui/label";
 
-import { login } from "@/appwrite/appwrite";
 import { merchantType } from "@/constants/types";
+import { account } from "@/appwrite/appwrite";
+import { OAuthProvider } from "appwrite";
 
 export function LoginForm({
   className,
@@ -19,7 +20,13 @@ export function LoginForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   const handleLoginClick = async (merchant: merchantType) => {
     try {
-      await login(merchant);
+      if (merchant === "google") {
+        await account.createOAuth2Session(
+          OAuthProvider.Google, // provider
+          "http://localhost:5173/", // redirect here on success
+          "http://localhost:5173/fail" // redirect here on failure
+        );
+      }
     } catch (err) {
       console.error(err);
     }
