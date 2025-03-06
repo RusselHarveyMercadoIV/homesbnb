@@ -1,19 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "build/client/**/*",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js"
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
