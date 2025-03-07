@@ -214,9 +214,9 @@ export default function Home() {
                 <CarouselContent className="rounded-lg">
                   {currentData?.bedroomImages.map((img, index) => (
                     <CarouselItem key={index}>
-                      <div className="p-0 rounded-lg">
+                      <div>
                         <Card className="p-0 rounded-lg">
-                          <CardContent className="rounded-lg flex aspect-square items-center justify-center  p-0 m-0">
+                          <CardContent className="rounded-lg flex aspect-square items-center justify-center h-[500px] p-0 m-0">
                             <img
                               src={img}
                               alt="bedroom-img"

@@ -28,6 +28,16 @@ import naval13 from "../assets/images/naval/naval-13.jfif";
 import navalbed1 from "../assets/images/naval/navalbed-1.jpeg";
 import navalbed2 from "../assets/images/naval/navalbed-2.jpeg";
 
+import tisa1 from "../assets/images/tisa/tisa1.jpeg";
+import tisa2 from "../assets/images/tisa/tisa2.jpeg";
+import tisa3 from "../assets/images/tisa/tisa3.jpeg";
+import tisa4 from "../assets/images/tisa/tisa4.jpeg";
+import tisa5 from "../assets/images/tisa/tisa5.jpeg";
+import tisa6 from "../assets/images/tisa/tisa6.jpeg";
+import tisa7 from "../assets/images/tisa/tisa7.jpeg";
+import tisa8 from "../assets/images/tisa/tisa8.jpeg";
+import tisa9 from "../assets/images/tisa/tisa9.jpeg";
+
 export const data = [
   {
     id: 1,
@@ -159,8 +169,8 @@ export const data = [
       smokeAlarm: true,
       wifi: false,
     },
-    bedroomImages: [],
-    images: [],
+    bedroomImages: [tisa3, tisa6, tisa7, tisa8],
+    images: [tisa1, tisa2, tisa3, tisa4, tisa5, tisa6, tisa7, tisa8, tisa9],
   },
 ];
 
