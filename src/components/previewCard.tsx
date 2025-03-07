@@ -34,7 +34,7 @@ export default function PreviewCard({
   return (
     <div
       onClick={handlePreviewClick}
-      className="flex flex-col gap-2 w-[350px] h-[450px] text-lg text-neutral-700 cursor-pointer"
+      className="flex flex-col gap-2 lg:w-[350px] lg:h-[450px] md:w-[250px] md:h-[350px] sm:w-[150px] sm:h-[150px]  text-lg text-neutral-700 cursor-pointer"
     >
       <div className="w-full h-[70%] bg-slate-200 rounded-xl">
         <img
