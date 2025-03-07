@@ -35,7 +35,6 @@ export default function BookRequest() {
 
   return (
     <>
-      <Navigation />
       <main className="relative flex flex-col gap-6 w-[1200px] mx-auto my-20">
         <h1 className="font-[600] text-3xl">Request to book</h1>
         {/* <p className="text-gray-600">
