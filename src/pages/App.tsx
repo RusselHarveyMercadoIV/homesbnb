@@ -12,6 +12,22 @@ import image15 from "../assets/images/grand-residence/condo1-4.jpg";
 import image16 from "../assets/images/grand-residence/condo1-5.jfif";
 import image17 from "../assets/images/grand-residence/condo1-6.jfif";
 
+import naval1 from "../assets/images/naval/naval-1.jfif";
+import naval2 from "../assets/images/naval/naval-2.jpeg";
+import naval3 from "../assets/images/naval/naval-3.avif";
+import naval4 from "../assets/images/naval/naval-4.avif";
+import naval5 from "../assets/images/naval/naval-5.avif";
+import naval6 from "../assets/images/naval/naval-6.avif";
+import naval7 from "../assets/images/naval/naval-7.avif";
+import naval8 from "../assets/images/naval/naval-8.avif";
+import naval9 from "../assets/images/naval/naval-9.jpeg";
+import naval10 from "../assets/images/naval/naval-10.jpeg";
+import naval11 from "../assets/images/naval/naval-11.jpeg";
+import naval12 from "../assets/images/naval/naval-12.jfif";
+import naval13 from "../assets/images/naval/naval-13.jfif";
+import navalbed1 from "../assets/images/naval/navalbed-1.jpeg";
+import navalbed2 from "../assets/images/naval/navalbed-2.jpeg";
+
 export const data = [
   {
     id: 1,
@@ -52,6 +68,7 @@ export const data = [
       smokeAlarm: true,
       wifi: true,
     },
+    bedroomImages: [image11],
     images: [image11, image12, image13, image14, image15, image16, image17],
   },
   {
@@ -89,7 +106,24 @@ export const data = [
       smokeAlarm: false,
       wifi: true,
     },
-    images: [],
+    bedroomImages: [navalbed1, navalbed2],
+    images: [
+      naval1,
+      naval2,
+      naval3,
+      naval4,
+      naval5,
+      naval6,
+      naval7,
+      naval8,
+      naval9,
+      naval10,
+      naval11,
+      naval12,
+      naval13,
+      navalbed1,
+      navalbed2,
+    ],
   },
   {
     id: 3,
@@ -125,6 +159,7 @@ export const data = [
       smokeAlarm: true,
       wifi: false,
     },
+    bedroomImages: [],
     images: [],
   },
 ];
