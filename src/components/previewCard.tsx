@@ -6,7 +6,7 @@ type PreviewCardType = {
   price: number;
   name: string;
   location: string;
-  from: string;
+  from: number;
   to: number;
   image: string;
 };

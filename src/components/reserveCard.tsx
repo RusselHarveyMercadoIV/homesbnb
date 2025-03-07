@@ -27,7 +27,7 @@ export default function ReserveCard({ price, from, to, id }: ReserveCardType) {
   };
 
   const handleReserveBtn = () => {
-    naviagtion(`/book/${id}`);
+    naviagtion(`/book/${id}`, { state: { nights: selectedDays } });
   };
 
   const computedPrice = selectedDays && price * selectedDays;
