@@ -1,4 +1,3 @@
-import Navigation from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import { data } from "./App";
 import { useLocation, useNavigate, useParams } from "react-router";
