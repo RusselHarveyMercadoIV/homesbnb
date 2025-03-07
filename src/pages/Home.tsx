@@ -139,8 +139,11 @@ export default function Home() {
               <h2 className="font-[600] text-2xl">{location}</h2>
               <p>
                 {currentData?.guests} guests{" "}
-                <span className="text-slate-300">|</span> 1 bed{" "}
-                <span className="text-slate-300">|</span> 1 bath
+                <span className="text-slate-300">|</span> {currentData?.bed} bed{" "}
+                <span className="text-slate-300">|</span>{" "}
+                {currentData?.bedrooms} bedrooms{" "}
+                <span className="text-slate-300">|</span> {currentData?.bath}{" "}
+                bath
               </p>
             </div>
             <section className="flex flex-col gap-2">
