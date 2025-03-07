@@ -12,8 +12,9 @@ export default function BookRequest() {
   };
 
   const currentData = data.find((item) => item.id.toString() === params.id);
+  const price = currentData?.price;
 
-  const total = currentData?.price * nights;
+  const total = price ? price * nights : 0;
 
   return (
     <>
