@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { account } from "../appwrite/appwrite";
-import { Models } from "appwrite";
+import { Models, OAuthProvider } from "appwrite";
 
 // Define User type using Appwrite's model
 type User = Models.User<Models.Preferences>;
@@ -8,7 +8,7 @@ type User = Models.User<Models.Preferences>;
 // Define context type
 type UserContextType = {
   user: User | null;
-  login: (email: string, password: string) => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
   // register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -46,27 +46,17 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     fetchUser();
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const loginWithGoogle = async () => {
     try {
-      await account.createEmailPasswordSession(email, password);
-      const response = await account.get();
-      setUser(response);
+      await account.createOAuth2Session(
+        OAuthProvider.Google, // provider
+        "http://localhost:5173/", // redirect here on success
+        "http://localhost:5173/login" // redirect here on failure
+      );
     } catch (error) {
-      console.error("Login failed:", error);
-      throw error;
+      console.error(error);
     }
   };
-
-  // const register = async (email: string, password: string, name: string) => {
-  //   try {
-  //     const userId = ID.unique();
-  //     await account.create(userId, email, password, name);
-  //     await login(email, password);
-  //   } catch (error) {
-  //     console.error("Registration failed:", error);
-  //     throw error;
-  //   }
-  // };
 
   const logout = async () => {
     try {
@@ -78,7 +68,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const value: UserContextType = { user, login, logout };
+  const value: UserContextType = { user, loginWithGoogle, logout };
 
   return (
     <UserContext.Provider value={value}>

@@ -14,6 +14,15 @@ import {
 } from "@/components/ui/carousel";
 
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import {
   AirVent,
   ShowerHead,
   Gamepad,
@@ -50,13 +59,18 @@ const amenityIcons: AmenityIcons = {
   FireExtinguisher: { icon: FireExtinguisher, label: "Fire Extinguisher" },
   gym: { icon: Dumbbell, label: "Gym" },
   kitchenette: { icon: UtensilsCrossed, label: "Kitchenette" },
+  kitchen: { icon: UtensilsCrossed, label: "Kitchen" },
   laundromatNearby: { icon: WashingMachine, label: "Laundromat Nearby" },
   longTermStays: { icon: Calendar, label: "Long Term Stays" },
   miniFridge: { icon: Refrigerator, label: "Mini Fridge" },
   outdoorFurniture: { icon: Sofa, label: "Outdoor Furniture" },
-  padParkingOnPremisis: {
+  paidParkingOnPremisis: {
     icon: ParkingSquare,
     label: "Paid Parking On Premises",
+  },
+  freeParkingOnPremisis: {
+    icon: ParkingSquare,
+    label: "Free Parking On Premises",
   },
   privatePatioOrBalcony: { icon: Flower, label: "Private Patio or Balcony" },
   publicPool: { icon: Waves, label: "Public Pool" },
@@ -76,6 +90,12 @@ export default function Home() {
   }) || { price: 0, name: "", location: "", schedule: "" };
 
   const currentData = data.find((item) => item.id === id);
+
+  const amenitiesLength = Object.values(currentData?.amenities || {}).filter(
+    Boolean
+  ).length;
+
+  console.log("id >> ", id);
 
   return (
     <>
@@ -116,7 +136,7 @@ export default function Home() {
             <div>
               <h2 className="font-[600] text-2xl">{location}</h2>
               <p>
-                2 guests <span className="text-slate-300">|</span> Studio{" "}
+                {currentData?.guests} guests{" "}
                 <span className="text-slate-300">|</span> 1 bed{" "}
                 <span className="text-slate-300">|</span> 1 bath
               </p>
@@ -145,17 +165,44 @@ export default function Home() {
                       );
                     })}
                 </ul>
-                <Button
-                  className="w-fit cursor-pointer px-8 py-6 text-md"
-                  variant={"outline"}
-                >
-                  Show all{" "}
-                  {
-                    Object.values(currentData?.amenities || {}).filter(Boolean)
-                      .length
-                  }{" "}
-                  amenities
-                </Button>
+                {amenitiesLength > 10 && (
+                  <Dialog>
+                    <DialogTrigger className="w-fit">
+                      <Button
+                        className="w-fit cursor-pointer px-8 py-6 text-md"
+                        variant={"outline"}
+                      >
+                        Show all {amenitiesLength} amenities
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>All Available Amenities</DialogTitle>
+                        <DialogDescription>
+                          {Object.entries(currentData?.amenities || {})
+                            .filter(([_, value]) => value)
+                            .map(([item]) => {
+                              const { icon: Icon, label } = amenityIcons[
+                                item
+                              ] || {
+                                icon: null,
+                                label: item,
+                              };
+                              return (
+                                <li
+                                  key={item}
+                                  className="flex items-center gap-2 mt-4"
+                                >
+                                  {Icon && <Icon size={20} />}{" "}
+                                  <span>{label}</span>{" "}
+                                </li>
+                              );
+                            })}
+                        </DialogDescription>
+                      </DialogHeader>
+                    </DialogContent>
+                  </Dialog>
+                )}
               </div>
             </section>
             <div className="border border-1 border-[#dee1e6]" />
@@ -182,7 +229,7 @@ export default function Home() {
               </Carousel>
             </section>
           </div>
-          <ReserveCard price={price} from={from} to={to} />
+          <ReserveCard price={price} from={from} to={to} id={id} />
         </div>
       </main>
     </>
