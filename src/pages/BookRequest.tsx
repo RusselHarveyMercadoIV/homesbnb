@@ -2,6 +2,7 @@ import Navigation from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import { data } from "./App";
 import { useLocation, useNavigate, useParams } from "react-router";
+import { addDays, format } from "date-fns";
 
 export default function BookRequest() {
   const params = useParams();
@@ -12,9 +13,25 @@ export default function BookRequest() {
   };
 
   const currentData = data.find((item) => item.id.toString() === params.id);
-  const price = currentData?.price;
 
-  const total = price ? price * nights : 0;
+  let schedule: string; // Declare outside if needed in wider scope
+  let total: number = 0;
+  if (!currentData) {
+    schedule = "Data not found";
+  } else {
+    const price = currentData.price;
+    const from = currentData.from;
+    const to = currentData.to;
+
+    total = price * to; // Assuming 'nights' is 'to'
+
+    schedule = `${format(new Date(from), "LLL dd")} - ${format(
+      addDays(new Date(from), to),
+      "dd"
+    )}`;
+  }
+
+  // Use 'schedule' as needed
 
   return (
     <>
@@ -38,7 +55,7 @@ export default function BookRequest() {
             <div className="mt-4">
               <h2 className="font-[500] text-xl">Your trip</h2>
               <div className="mt-2 flex justify-between items-center">
-                <span>Dates: Mar 16–21</span>
+                <span>Dates: {schedule}</span>
                 {/* <a href="#" className="text-blue-600">
                   Edit
                 </a> */}
