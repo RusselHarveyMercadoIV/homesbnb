@@ -10,27 +10,30 @@ import {
 // import { Input } from "@/components/ui/input";
 // import { Label } from "@/components/ui/label";
 
-import { merchantType } from "@/constants/types";
-import { account } from "@/appwrite/appwrite";
-import { OAuthProvider } from "appwrite";
+// import { merchantType } from "@/constants/types";
+// import { account } from "@/appwrite/appwrite";
+// import { OAuthProvider } from "appwrite";
+import { useUser } from "@/context/user";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const handleLoginClick = async (merchant: merchantType) => {
-    try {
-      if (merchant === "google") {
-        await account.createOAuth2Session(
-          OAuthProvider.Google, // provider
-          "https://homesbnb.vercel.app/", // redirect here on success
-          "https://homesbnb.vercel.app/login" // redirect here on failure
-        );
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const { loginWithGoogle } = useUser();
+
+  // const handleLoginClick = async (merchant: merchantType) => {
+  //   try {
+  //     if (merchant === "google") {
+  //       await account.createOAuth2Session(
+  //         OAuthProvider.Google, // provider
+  //         "http://localhost:5173/", // redirect here on success
+  //         "http://localhost:5173/fail" // redirect here on failure
+  //       );
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -60,7 +63,7 @@ export function LoginForm({
               <Button
                 variant="outline"
                 className="w-full cursor-pointer"
-                onClick={() => handleLoginClick("google")}
+                onClick={loginWithGoogle}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path

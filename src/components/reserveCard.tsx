@@ -2,18 +2,32 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DatePickerWithRange } from "@/components/ui/datepicker-range";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select";
 
 type ReserveCardType = {
   price: number;
   from: string;
   to: number;
+  id: number;
 };
 
-export default function ReserveCard({ price, from, to }: ReserveCardType) {
+export default function ReserveCard({ price, from, to, id }: ReserveCardType) {
   const [selectedDays, setSelectedDays] = useState<number>();
+  const naviagtion = useNavigate();
 
   const handleGetDaysInput = (days: number) => {
     setSelectedDays(days);
+  };
+
+  const handleReserveBtn = () => {
+    naviagtion(`/book/${id}`);
   };
 
   const computedPrice = selectedDays && price * selectedDays;
@@ -32,9 +46,22 @@ export default function ReserveCard({ price, from, to }: ReserveCardType) {
             from={from}
             to={to}
           />
+          {/* <Select>
+            <SelectTrigger className="w-full cursor-pointer">
+              <SelectValue placeholder="Guests" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">Light</SelectItem>
+              <SelectItem value="dark">Dark</SelectItem>
+              <SelectItem value="system">System</SelectItem>
+            </SelectContent>
+          </Select> */}
         </div>
 
-        <Button className="text-xl rounded-full py-6 w-full cursor-pointer">
+        <Button
+          className="text-xl rounded-full py-6 w-full cursor-pointer"
+          onClick={handleReserveBtn}
+        >
           Reserve
         </Button>
         <p className="text-slate-800">You won't be charged yet</p>
