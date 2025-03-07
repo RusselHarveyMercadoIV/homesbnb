@@ -40,6 +40,7 @@ export default function PreviewCard({
         <img
           src={image}
           alt="cover"
+          loading="eager"
           className="w-full h-full object-cover rounded-xl"
         />
       </div>

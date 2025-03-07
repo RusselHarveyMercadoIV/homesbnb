@@ -109,6 +109,7 @@ export default function Home() {
           {/* First image: rounded top-left and bottom-left */}
           <img
             src={currentData?.images[0]}
+            loading="eager"
             className="w-full object-cover h-[600px] rounded-tl-xl rounded-bl-xl col-span-1"
           />
           <div className="w-full h-[600px] grid grid-cols-2 grid-rows-2">
@@ -125,6 +126,7 @@ export default function Home() {
                 <img
                   key={index}
                   src={image}
+                  loading="eager"
                   className={`h-full w-full object-cover ${borderClass}`}
                 />
               );
