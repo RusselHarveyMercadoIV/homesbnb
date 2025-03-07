@@ -105,14 +105,14 @@ export default function Home() {
         {/* <button className="absolute right-10 top-4 cursor-pointer">
           share
         </button> */}
-        <div className="grid grid-cols-2 w-[1200px] h-[600px] bg-slate-200 rounded-xl overflow-hidden">
+        <div className="grid grid-cols-2 w-[1200px] h-[600px] gap-2 rounded-xl overflow-hidden">
           {/* First image: rounded top-left and bottom-left */}
           <img
             src={currentData?.images[0]}
             loading="eager"
             className="w-full object-cover h-[600px] rounded-tl-xl rounded-bl-xl col-span-1"
           />
-          <div className="w-full h-[600px] grid grid-cols-2 grid-rows-2">
+          <div className="w-full h-[600px] gap-2 grid grid-cols-2 grid-rows-2">
             {currentData?.images.slice(1, 5).map((image, index) => {
               let borderClass = "";
               if (index === 1) {
@@ -211,23 +211,25 @@ export default function Home() {
             <section className="flex flex-col gap-6">
               <h2 className="text-2xl font-[600]">Where you'll sleep</h2>
               <Carousel className="w-full max-w-xs">
-                <CarouselContent>
-                  {Array.from({ length: 5 }).map((_, index) => (
+                <CarouselContent className="rounded-lg">
+                  {currentData?.bedroomImages.map((img, index) => (
                     <CarouselItem key={index}>
-                      <div className="p-1">
-                        <Card>
-                          <CardContent className="flex aspect-square items-center justify-center p-6">
-                            <span className="text-4xl font-semibold">
-                              {index + 1}
-                            </span>
+                      <div>
+                        <Card className="p-0 rounded-lg">
+                          <CardContent className="rounded-lg flex aspect-square items-center justify-center h-[500px] p-0 m-0">
+                            <img
+                              src={img}
+                              alt="bedroom-img"
+                              className="rounded-lg w-full h-[500px] object-cover"
+                            />
                           </CardContent>
                         </Card>
                       </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="cursor-pointer" />
+                <CarouselNext className="cursor-pointer" />
               </Carousel>
             </section>
           </div>
