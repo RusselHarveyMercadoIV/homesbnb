@@ -183,8 +183,8 @@ export default function BookRequest() {
                 <div className="flex flex-col gap-10">
                   <i className="text-sm text-neutral-500">
                     By selecting the button below, I agree to the Host's House
-                    Rules, Ground rules for guests, Airbnb's Rebooking and
-                    Refund Policy, and that Airbnb can charge my payment method
+                    Rules, Ground rules for guests, Homebnb's Rebooking and
+                    Refund Policy, and that Homebnb can charge my payment method
                     if I’m responsible for damage.
                   </i>
                   <Button className="w-[250px] h-[65px] text-xl">
