@@ -222,13 +222,13 @@ export default function BookRequest() {
           </div>
 
           {/* Right Section: Property and Price Details */}
-          <div className="w-1/3">
-            <div className=" border p-4 rounded-lg">
+          <div className="w-[450px]">
+            <div className=" border p-8 rounded-lg">
               <div className="flex justify-center  gap-5 ">
                 <img
                   src={currentData?.coverImage}
                   alt="cover"
-                  className="rounded-lg object-cover h-[80px] w-[170px]"
+                  className="rounded-lg object-cover h-[100px] w-[170px]"
                 />
                 <div>
                   <h2 className="font-[500] text-xl">{currentData?.name}</h2>
