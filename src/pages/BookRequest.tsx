@@ -13,6 +13,9 @@ import {
 } from "@/components/ui/select";
 
 import EVENT from "../assets/icons/event.png";
+import GCASH_SOLO from "../assets/icons/gcash-1.png";
+import GCASH from "../assets/icons/gcash-2.png";
+import MONEY from "../assets/icons/money.png";
 
 export default function BookRequest() {
   const { user } = useUser();
@@ -138,14 +141,37 @@ export default function BookRequest() {
             ) : (
               <div>
                 <div className="flex flex-col gap-5">
-                  <h2 className="font-[500] text-xl">Pay with</h2>
+                  <div className="flex justify-between items-center h-[40px]">
+                    <h2 className="font-[500] text-xl">Pay with</h2>
+                    <img src={GCASH} alt="gcash-1" className="w-[100px]" />
+                  </div>
                   <Select>
-                    <SelectTrigger className="w-full h-[50px] cursor-pointer">
+                    <SelectTrigger className="w-full text-lg h-[50px] cursor-pointer">
                       <SelectValue defaultValue="gcash" placeholder={"Gcash"} />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="gcash">GCash</SelectItem>
-                      <SelectItem value="cash">Cash</SelectItem>
+                    <SelectContent className="py-4 px-2">
+                      <SelectItem
+                        value="gcash"
+                        className="cursor-pointer text-lg"
+                      >
+                        <img
+                          src={GCASH_SOLO}
+                          className="w-[30px] h-[30px]"
+                          alt="gcash"
+                        />
+                        <p>GCash</p>
+                      </SelectItem>
+                      <SelectItem
+                        value="cash"
+                        className="cursor-pointer text-lg mt-2"
+                      >
+                        <img
+                          src={MONEY}
+                          className="w-[30px] h-[30px] opacity-30"
+                          alt="cash"
+                        />
+                        <p>Cash</p>
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -187,7 +213,7 @@ export default function BookRequest() {
                     Refund Policy, and that Homebnb can charge my payment method
                     if I’m responsible for damage.
                   </i>
-                  <Button className="w-[250px] h-[65px] text-xl">
+                  <Button className="w-[250px] h-[65px] text-xl cursor-pointer">
                     Request to book
                   </Button>
                 </div>
