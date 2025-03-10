@@ -6,12 +6,14 @@ import Home from "./pages/Home";
 import LoginPage from "./pages/Login";
 import { UserProvider } from "./context/user";
 import BookRequest from "./pages/BookRequest";
+import SuccessPage from "./pages/SuccessPage";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <UserProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/success" element={<SuccessPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/book/:id" element={<BookRequest />} />
         <Route path="/login" element={<LoginPage />} />

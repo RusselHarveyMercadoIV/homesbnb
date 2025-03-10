@@ -17,7 +17,7 @@ export default function Navigation() {
           Explore
         </NavLink>
       </NavigationMenu>
-      <div className="w-[120px] flex gap-2 justify-center items-center">
+      <div className="w-fit flex gap-2 justify-center items-center">
         <img src={PROFILE} alt="profile" width={35} height={35} />
         {!user ? (
           <NavLink
