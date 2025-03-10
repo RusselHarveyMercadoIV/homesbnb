@@ -8,7 +8,7 @@ type User = Models.User<Models.Preferences>;
 // Define context type
 type UserContextType = {
   user: User | null;
-  loginWithGoogle: () => Promise<void>;
+  loginWithGoogle: () => void;
   // register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -46,15 +46,15 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     fetchUser();
   }, []);
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = () => {
     try {
-      await account.createOAuth2Session(
+      account.createOAuth2Session(
         OAuthProvider.Google, // provider
-        "http://localhost:5173/", // redirect here on success
+        "http://localhost:5173/success", // redirect here on success
         "http://localhost:5173/login" // redirect here on failure
       );
     } catch (error) {
-      console.error(error);
+      console.error("login error > " + error);
     }
   };
 

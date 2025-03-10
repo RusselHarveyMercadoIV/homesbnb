@@ -37,6 +37,7 @@ import tisa6 from "../assets/images/tisa/tisa6.jpeg";
 import tisa7 from "../assets/images/tisa/tisa7.jpeg";
 import tisa8 from "../assets/images/tisa/tisa8.jpeg";
 import tisa9 from "../assets/images/tisa/tisa9.jpeg";
+import { account } from "@/appwrite/appwrite";
 
 export const data = [
   {
