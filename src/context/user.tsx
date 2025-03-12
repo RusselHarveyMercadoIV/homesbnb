@@ -50,8 +50,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       account.createOAuth2Session(
         OAuthProvider.Google, // provider
-        "http://localhost:5173/success", // redirect here on success
-        "http://localhost:5173/login" // redirect here on failure
+        "https://homesbnb.vercel.app//success", // redirect here on success
+        "https://homesbnb.vercel.app//login" // redirect here on failure
       );
     } catch (error) {
       console.error("login error > " + error);
