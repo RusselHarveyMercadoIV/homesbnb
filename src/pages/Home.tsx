@@ -1,7 +1,7 @@
 import Navigation from "@/components/navigation";
 import ReserveCard from "@/components/reserveCard";
-import { useLocation } from "react-router";
-import { data } from "./App";
+import { useParams } from "react-router";
+import { data } from "./../constants/mock";
 import { Button } from "@/components/ui/button";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -41,6 +41,7 @@ import {
   AlertCircle,
   Wifi,
 } from "lucide-react";
+import { Key, useEffect, useState } from "react";
 
 // Define types
 type AmenityIcon = {
@@ -79,83 +80,102 @@ const amenityIcons: AmenityIcons = {
 };
 
 export default function Home() {
-  const routeLocation = useLocation();
-  const { id, price, name, location, from, to } = (routeLocation.state as {
-    id: number;
-    price: number;
-    name: string;
-    location: string;
-    from: string;
-    to: number;
-  }) || { price: 0, name: "", location: "", schedule: "" };
+  // const routeLocation = useLocation();
+  // const { id, price, name, location, from, to } = (routeLocation.state as {
+  //   id: number;
+  //   price: number;
+  //   name: string;
+  //   location: string;
+  //   from: string;
+  //   to: number;
+  // }) || { price: 0, name: "", location: "", schedule: "" };
+  const [roomData, setRoomData] = useState<any>(null);
+  const params = useParams();
+  const { id } = params;
 
-  const currentData = data.find((item) => item.id === id);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // const response = await fetch(`http://localhost:3000/rooms/${id}`);
+        // const data = await response.json();
+        const foundData = data.find((item) => item.id === Number(id));
+        setRoomData(foundData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const amenitiesLength = Object.values(currentData?.amenities || {}).filter(
+    fetchData();
+  }, [id]);
+
+  // const currentData = data.find((item) => item.id === roomData?.id);
+
+  const amenitiesLength = Object.values(roomData?.amenities || {}).filter(
     Boolean
   ).length;
-
-  console.log("id >> ", id);
 
   return (
     <>
       <Navigation />
       <main className="relative flex flex-col gap-6 w-[1200px] mx-auto justify-center items-center my-20 mx-20">
-        <h1 className="font-[600] text-4xl">{name}</h1>
+        <h1 className="font-[600] text-4xl">{roomData?.name}</h1>
         {/* <button className="absolute right-10 top-4 cursor-pointer">
           share
         </button> */}
         <div className="grid grid-cols-2 w-[1200px] h-[600px] gap-2 rounded-xl overflow-hidden">
           {/* First image: rounded top-left and bottom-left */}
           <img
-            src={currentData?.images[0]}
+            src={roomData?.images[0]}
             loading="eager"
             className="w-full object-cover h-[600px] rounded-tl-xl rounded-bl-xl col-span-1"
           />
           <div className="w-full h-[600px] gap-2 grid grid-cols-2 grid-rows-2">
-            {currentData?.images.slice(1, 5).map((image, index) => {
-              let borderClass = "";
-              if (index === 1) {
-                // Top-right image: rounded top-right corner
-                borderClass = "rounded-tr-xl";
-              } else if (index === 3) {
-                // Bottom-right image: rounded bottom-right corner
-                borderClass = "rounded-br-xl";
-              }
-              return (
-                <img
-                  key={index}
-                  src={image}
-                  loading="eager"
-                  className={`h-full w-full object-cover ${borderClass}`}
-                />
-              );
-            })}
+            {roomData?.images
+              .slice(1, 5)
+              .map(
+                (image: string | undefined, index: Key | null | undefined) => {
+                  let borderClass = "";
+                  if (index === 1) {
+                    // Top-right image: rounded top-right corner
+                    borderClass = "rounded-tr-xl";
+                  } else if (index === 3) {
+                    // Bottom-right image: rounded bottom-right corner
+                    borderClass = "rounded-br-xl";
+                  }
+                  return (
+                    <img
+                      key={index}
+                      src={image}
+                      loading="eager"
+                      className={`h-full w-full object-cover ${borderClass}`}
+                    />
+                  );
+                }
+              )}
           </div>
         </div>
         <div className="relative flex w-full justify-between">
           <div className="flex flex-col gap-10 pr-25">
             <div>
-              <h2 className="font-[600] text-2xl">{location}</h2>
+              <h2 className="font-[600] text-2xl">{roomData?.location}</h2>
               <p>
-                {currentData?.guests} guests{" "}
-                <span className="text-slate-300">|</span> {currentData?.bed} bed{" "}
-                <span className="text-slate-300">|</span>{" "}
-                {currentData?.bedrooms} bedrooms{" "}
-                <span className="text-slate-300">|</span> {currentData?.bath}{" "}
-                bath
+                {roomData?.guests} guests{" "}
+                <span className="text-slate-300">|</span> {roomData?.bed} bed{" "}
+                <span className="text-slate-300">|</span> {roomData?.bedrooms}{" "}
+                bedrooms <span className="text-slate-300">|</span>{" "}
+                {roomData?.bath} bath
               </p>
             </div>
             <section className="flex flex-col gap-2">
               <h2 className="font-[600] text-2xl">Description</h2>
-              <p>{currentData?.description}</p>
+              <p>{roomData?.description}</p>
             </section>
             <div className="border border-1 border-[#dee1e6]" />
             <section className="flex flex-col gap-6">
               <h2 className="text-2xl font-[600]">What this place offers</h2>
               <div className="flex flex-col gap-6 w-[550px]">
                 <ul className="grid grid-cols-2 text-lg text-slate-800">
-                  {Object.entries(currentData?.amenities || {})
+                  {Object.entries(roomData?.amenities || {})
                     .filter(([_, value]) => value)
                     .slice(0, 9)
                     .map(([item]) => {
@@ -184,7 +204,7 @@ export default function Home() {
                       <DialogHeader>
                         <DialogTitle>All Available Amenities</DialogTitle>
                         <DialogDescription>
-                          {Object.entries(currentData?.amenities || {})
+                          {Object.entries(roomData?.amenities || {})
                             .filter(([_, value]) => value)
                             .map(([item]) => {
                               const { icon: Icon, label } = amenityIcons[
@@ -215,28 +235,40 @@ export default function Home() {
               <h2 className="text-2xl font-[600]">Where you'll sleep</h2>
               <Carousel className="w-full max-w-xs">
                 <CarouselContent className="rounded-lg">
-                  {currentData?.bedroomImages.map((img, index) => (
-                    <CarouselItem key={index}>
-                      <div>
-                        <Card className="p-0 rounded-lg">
-                          <CardContent className="rounded-lg flex aspect-square items-center justify-center h-[500px] p-0 m-0">
-                            <img
-                              src={img}
-                              alt="bedroom-img"
-                              className="rounded-lg w-full h-[500px] object-cover"
-                            />
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </CarouselItem>
-                  ))}
+                  {roomData?.bedroomImages.map(
+                    (
+                      img: string | undefined,
+                      index: Key | null | undefined
+                    ) => (
+                      <CarouselItem key={index}>
+                        <div>
+                          <Card className="p-0 rounded-lg">
+                            <CardContent className="rounded-lg flex aspect-square items-center justify-center h-[500px] p-0 m-0">
+                              <img
+                                src={img}
+                                alt="bedroom-img"
+                                className="rounded-lg w-full h-[500px] object-cover"
+                              />
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </CarouselItem>
+                    )
+                  )}
                 </CarouselContent>
                 <CarouselPrevious className="cursor-pointer" />
                 <CarouselNext className="cursor-pointer" />
               </Carousel>
             </section>
           </div>
-          <ReserveCard price={price} from={from} to={to} id={id} />
+          {roomData && (
+            <ReserveCard
+              price={roomData?.price}
+              from={roomData?.from}
+              to={roomData?.to}
+              id={Number(id) || 0}
+            />
+          )}
         </div>
       </main>
     </>
