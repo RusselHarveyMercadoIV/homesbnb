@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { data } from "./App";
+import { data } from "../constants/mock";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { addDays, format } from "date-fns";
 import { useUser } from "@/context/user";

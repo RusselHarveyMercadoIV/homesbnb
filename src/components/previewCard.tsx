@@ -14,7 +14,6 @@ type PreviewCardType = {
 export default function PreviewCard({
   id,
   price,
-  name,
   location,
   from,
   to,
@@ -23,7 +22,7 @@ export default function PreviewCard({
   const navigate = useNavigate();
 
   const handlePreviewClick = () => {
-    navigate("/home", { state: { id, price, name, location, from, to } });
+    navigate(`/home/${id}`);
   };
 
   const schedule = `${format(new Date(from), "LLL dd")} - ${format(
