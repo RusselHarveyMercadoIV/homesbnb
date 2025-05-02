@@ -7,6 +7,8 @@ import LoginPage from "./pages/Login";
 import { UserProvider } from "./context/user";
 import BookRequest from "./pages/BookRequest";
 import SuccessPage from "./pages/SuccessPage";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <UserProvider>
@@ -17,6 +19,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/home/:id" element={<Home />} />
         <Route path="/book/:id" element={<BookRequest />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   </UserProvider>

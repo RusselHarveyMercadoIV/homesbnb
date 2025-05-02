@@ -5,7 +5,7 @@ import PROFILE from "../assets/icons/profile.png";
 import { useUser } from "@/context/user";
 
 export default function Navigation() {
-  const { user } = useUser();
+  const { user, isAdmin } = useUser();
 
   return (
     <header className="sticky top-0 bg-white flex flex-row h-30 justify-between items-center px-20 z-1 border-b-1">
@@ -16,6 +16,11 @@ export default function Navigation() {
         <NavLink to="/" end>
           Explore
         </NavLink>
+        {isAdmin() && (
+          <NavLink to="/dashboard" end>
+            Dashboard
+          </NavLink>
+        )}
       </NavigationMenu>
       <div className="w-fit flex gap-2 justify-center items-center">
         <img src={PROFILE} alt="profile" width={35} height={35} />
@@ -27,9 +32,7 @@ export default function Navigation() {
             Login
           </NavLink>
         ) : (
-          <p className=" className=" bg-black text-white px-6 py-1 rounded-xl>
-            {user.name}
-          </p>
+          <p>{user.name}</p>
         )}
       </div>
     </header>

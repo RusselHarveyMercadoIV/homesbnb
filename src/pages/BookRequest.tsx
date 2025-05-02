@@ -128,13 +128,7 @@ export default function BookRequest() {
                 <div className="mt-4">
                   <p className="text-center text-gray-600">or</p>
                   <button className="border p-2 w-full mt-2 rounded cursor-pointer">
-                    Continue with Facebook
-                  </button>
-                  <button className="border p-2 w-full mt-2 rounded cursor-pointer">
                     Continue with Google
-                  </button>
-                  <button className="border p-2 w-full mt-2 rounded cursor-pointer">
-                    Continue with Apple
                   </button>
                 </div>
               </div>
