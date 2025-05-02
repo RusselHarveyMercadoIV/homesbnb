@@ -41,8 +41,10 @@ export default function Dashboard() {
     <>
       <Navigation />
       <main className="flex flex-col gap-10 justify-center items-center px-20 my-20">
-        <div className="*:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4 grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card lg:px-6">
-          <Card className="@container/card">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <p>Welcome to your dashboard!</p>
+        <div className="flex flex-row gap-10 w-full justify-center items-center">
+          <Card className="w-full max-w-full h-[200px]">
             <CardHeader className="relative">
               <CardDescription>Total Revenue</CardDescription>
               <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
@@ -67,7 +69,7 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="@container/card">
+          <Card className="w-full max-w-full h-[200px]">
             <CardHeader className="relative">
               <CardDescription>New Customers</CardDescription>
               <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
@@ -92,7 +94,7 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="@container/card">
+          <Card className="w-full max-w-full h-[200px]">
             <CardHeader className="relative">
               <CardDescription>Active Accounts</CardDescription>
               <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
@@ -117,7 +119,7 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="@container/card">
+          <Card className="w-full max-w-full h-[200px]">
             <CardHeader className="relative">
               <CardDescription>Growth Rate</CardDescription>
               <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
@@ -143,9 +145,6 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p>Welcome to your dashboard!</p>
-        <div></div>
         <div className="container mx-auto py-10">
           <DataTable columns={columns} data={tableData} />
         </div>
