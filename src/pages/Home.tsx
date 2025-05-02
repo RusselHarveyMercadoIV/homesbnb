@@ -80,15 +80,6 @@ const amenityIcons: AmenityIcons = {
 };
 
 export default function Home() {
-  // const routeLocation = useLocation();
-  // const { id, price, name, location, from, to } = (routeLocation.state as {
-  //   id: number;
-  //   price: number;
-  //   name: string;
-  //   location: string;
-  //   from: string;
-  //   to: number;
-  // }) || { price: 0, name: "", location: "", schedule: "" };
   const [roomData, setRoomData] = useState<any>(null);
   const params = useParams();
   const { id } = params;
@@ -107,8 +98,6 @@ export default function Home() {
 
     fetchData();
   }, [id]);
-
-  // const currentData = data.find((item) => item.id === roomData?.id);
 
   const amenitiesLength = Object.values(roomData?.amenities || {}).filter(
     Boolean

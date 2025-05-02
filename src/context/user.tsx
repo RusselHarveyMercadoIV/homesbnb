@@ -10,6 +10,7 @@ type UserContextType = {
   user: User | null;
   loginWithGoogle: () => void;
   // register: (email: string, password: string, name: string) => Promise<void>;
+  isAdmin: () => boolean;
   logout: () => Promise<void>;
 };
 
@@ -68,7 +69,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const value: UserContextType = { user, loginWithGoogle, logout };
+  const isAdmin = () => {
+    if (!user) return false;
+    return user?.labels?.includes("admin") || false;
+  };
+
+  const value: UserContextType = { user, loginWithGoogle, isAdmin, logout };
 
   return (
     <UserContext.Provider value={value}>
